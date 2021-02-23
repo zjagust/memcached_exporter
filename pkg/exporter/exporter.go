@@ -613,7 +613,7 @@ func (e *Exporter) RunCollect(address string, ch chan<- prometheus.Metric, wg *s
 	ch <- prometheus.MustNewConstMetric(e.up, prometheus.GaugeValue, up, address)
 }
 
-func (e *Exporter) parseStats(ch chan<- prometheus.Metric, stats map[net.Addr]memcache.Stats) error {
+func (e *Exporter) parseStats(address, ch chan<- prometheus.Metric, stats map[net.Addr]memcache.Stats) error {
 	// TODO(ts): Clean up and consolidate metric mappings.
 	itemsCounterMetrics := map[string]*prometheus.Desc{
 		"crawler_reclaimed": e.itemsCrawlerReclaimed,
